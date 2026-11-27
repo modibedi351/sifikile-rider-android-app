@@ -157,7 +157,7 @@ let jobs = [];
 let profile=JSON.parse(localStorage.getItem('sfRiderProfile')||'null')||{name:'Thabo Rider',phone:'071 000 0000',email:'',vehicle:'Motorbike',reg:'',area:'Kagiso / Krugersdorp'};
 let available=localStorage.getItem('sfRiderOnline')!=='false';
 function money(n){return 'R'+Number(n||0).toFixed(2)}
-function async function loadJobs() {
+async function loadJobs() {
   try {
     const data = await apiRequest('deliveries');
     const deliveries = data.deliveries || data.jobs || [];
