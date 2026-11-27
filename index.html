@@ -188,7 +188,24 @@ function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.s
 function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===p));document.getElementById('pageTitle').textContent=pageTitles[p];render();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
 function jobCard(j,mode){let status=j.status==='COUNTERED'?'COUNTER-OFFER SENT':j.status;return `<article class="job"><div class="job-top"><div><strong>${j.id} · ${j.kind}</strong><small>Customer: ${j.customer} · ${j.distance} km approx.</small></div><span class="pill ${j.status==='COMPLETED'?'green':''}">${status}</span></div><div class="route"><div class="pins">●<br>│<br>●</div><div><b>Pickup:</b> ${j.pickup}<br><b>Drop-off:</b> ${j.drop}<br><span style="color:#718096">${j.note||''}</span></div></div><div class="job-bottom"><div><div class="sub">CUSTOMER OFFER</div><div class="pay">${money(j.fee)}</div></div><div class="actions">${mode==='open'?`<button class="btn small" onclick="acceptJob('${j.id}')">Accept job</button><button class="btn ghost small" onclick="counterJob('${j.id}')">Counter-offer</button>`:mode==='active'?`${j.status==='ACCEPTED'?`<button class="btn small" onclick="updateJob('${j.id}','PICKED UP')">Mark picked up</button>`:''}${j.status==='PICKED UP'?`<button class="btn small" onclick="updateJob('${j.id}','COMPLETED')">Complete delivery</button>`:''}<button class="btn red small" onclick="cancelJob('${j.id}')">Cancel</button>`:`<span class="pill green">Earned ${money(j.fee)}</span>`}</div></div>${j.status==='COUNTERED'?`<small>Your counter-offer: <b>${money(j.counter)}</b> · Waiting for customer approval (demo)</small>`:''}</article>`}
-function acceptJob(id){if(!available){toast('Switch your availability on first.');return}let j=jobs.find(x=>x.id===id);if(!j)return;j.status='ACCEPTED';save();render();toast('Job accepted. It is now in My deliveries.')}
+async function acceptJob(id) {
+  if (!available) {
+    toast('Switch your availability on first.');
+    return;
+  }
+
+  try {
+    await apiRequest('accept_job', {
+      method: 'POST',
+      body: JSON.stringify({delivery_id: Number(id)})
+    });
+
+    await loadJobs();
+    toast('Delivery accepted successfully!');
+  } catch (error) {
+    toast('Could not accept delivery: ' + error.message);
+  }
+}
 function counterJob(id){if(!available){toast('Switch your availability on first.');return}let j=jobs.find(x=>x.id===id);let raw=prompt('Enter your counter-offer in rand (customer offer: '+money(j.fee)+')');if(raw===null)return;let amount=Number(raw);if(!Number.isFinite(amount)||amount<=0){toast('Enter a valid amount.');return}j.counter=amount;j.status='COUNTERED';save();render();toast('Counter-offer sent for customer approval.')}
 async function updateJob(id, status) {
   const statusMap = {
