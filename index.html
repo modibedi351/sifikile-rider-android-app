@@ -153,7 +153,6 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
   }
 });
 const pageTitles={home:'Rider dashboard',jobs:'Available jobs',active:'My deliveries',earnings:'Earnings',profile:'Rider profile'};
-const seedJobs=[
 let jobs = [];
 let profile=JSON.parse(localStorage.getItem('sfRiderProfile')||'null')||{name:'Thabo Rider',phone:'071 000 0000',email:'',vehicle:'Motorbike',reg:'',area:'Kagiso / Krugersdorp'};
 let available=localStorage.getItem('sfRiderOnline')!=='false';
