@@ -90,7 +90,25 @@
 <script>
 const API_URL = 'https://sifikilefleet.co.za/fleet/api/index.php';
 let csrfToken = '';
+async function apiRequest(action, options = {}) {
+  const response = await fetch(API_URL + '?action=' + action, {
+    credentials: 'include',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(options.body && csrfToken ? {'X-CSRF-Token': csrfToken} : {}),
+      ...(options.headers || {})
+    }
+  });
 
+  const data = await response.json();
+
+  if (!response.ok || data.error) {
+    throw new Error(data.error || 'Server connection failed.');
+  }
+
+  return data;
+}
 document.getElementById('loginForm').addEventListener('submit', async function(e) {
   e.preventDefault();
 
