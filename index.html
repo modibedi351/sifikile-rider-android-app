@@ -154,12 +154,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 });
 const pageTitles={home:'Rider dashboard',jobs:'Available jobs',active:'My deliveries',earnings:'Earnings',profile:'Rider profile'};
 const seedJobs=[
-{id:'SF-2041',kind:'Food delivery',pickup:'Debonairs Pizza, Kagiso Mall',drop:'Kagiso Ext 14, Main Road',distance:4.2,fee:48,customer:'Lerato',note:'Keep food upright'},
-{id:'SF-2042',kind:'Parcel',pickup:'Kagiso Plaza',drop:'Krugersdorp CBD',distance:7.5,fee:68,customer:'Mandla',note:'Small sealed parcel'},
-{id:'SF-2043',kind:'Groceries',pickup:'Checkers, Key West',drop:'Mindalore, Krugersdorp',distance:5.1,fee:55,customer:'Nandi',note:'Please call on arrival'},
-{id:'SF-2044',kind:'Documents',pickup:'Chamdor Business Park',drop:'Kagiso Ext 9',distance:6.3,fee:60,customer:'Sipho',note:'Handle documents carefully'}
-];
-let jobs=JSON.parse(localStorage.getItem('sfRiderJobs')||'null')||seedJobs.map(x=>({...x,status:'OPEN'}));
+let jobs = [];
 let profile=JSON.parse(localStorage.getItem('sfRiderProfile')||'null')||{name:'Thabo Rider',phone:'071 000 0000',email:'',vehicle:'Motorbike',reg:'',area:'Kagiso / Krugersdorp'};
 let available=localStorage.getItem('sfRiderOnline')!=='false';
 function money(n){return 'R'+Number(n||0).toFixed(2)}
