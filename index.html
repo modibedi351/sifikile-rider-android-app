@@ -22,7 +22,19 @@
 </style>
 </head>
 <body>
-<div class="app">
+<div id="loginScreen" style="min-height:100vh;display:grid;place-items:center;padding:20px;background:#061f38;font-family:Arial,sans-serif">
+  <form id="loginForm" style="background:white;padding:28px;border-radius:18px;width:100%;max-width:380px">
+    <h2 style="color:#061f38;margin-top:0">SIFIKILE FLEET</h2>
+    <p style="color:#718096">Rider Partner Login</p>
+    <label>Email address</label>
+    <input id="loginEmail" type="email" required style="width:100%;padding:13px;margin:8px 0 16px;border:1px solid #dce4ed;border-radius:9px">
+    <label>Password</label>
+    <input id="loginPassword" type="password" required style="width:100%;padding:13px;margin:8px 0 16px;border:1px solid #dce4ed;border-radius:9px">
+    <button type="submit" style="width:100%;padding:14px;background:#ff8500;color:#061f38;border:0;border-radius:9px;font-weight:bold">LOG IN</button>
+    <p id="loginMessage" style="color:#bd3d36;font-size:13px"></p>
+  </form>
+</div>
+<div class="app" id="riderApp" style="display:none">
 <aside class="sidebar">
  <div class="brand"><div class="logo">S</div><div><strong>SIFIKILE FLEET</strong><small>RIDER PARTNER</small></div></div>
  <div class="nav-label">RIDER WORKSPACE</div>
