@@ -158,7 +158,33 @@ let jobs = [];
 let profile=JSON.parse(localStorage.getItem('sfRiderProfile')||'null')||{name:'Thabo Rider',phone:'071 000 0000',email:'',vehicle:'Motorbike',reg:'',area:'Kagiso / Krugersdorp'};
 let available=localStorage.getItem('sfRiderOnline')!=='false';
 function money(n){return 'R'+Number(n||0).toFixed(2)}
-function save(){localStorage.setItem('sfRiderJobs',JSON.stringify(jobs))}
+function async function loadJobs() {
+  try {
+    const data = await apiRequest('deliveries');
+    const deliveries = data.deliveries || data.jobs || [];
+
+    jobs = deliveries.map(d => ({
+      id: String(d.id),
+      kind: d.item_description || 'Delivery',
+      pickup: d.pickup_address || 'Pickup address unavailable',
+      drop: d.dropoff_address || 'Drop-off address unavailable',
+      fee: Number(d.accepted_fare || d.customer_fare || 0),
+      customer: d.customer_name || 'Customer',
+      note: d.delivery_notes || '',
+      status: ({
+        open: 'OPEN',
+        assigned: 'ACCEPTED',
+        picked_up: 'PICKED UP',
+        in_transit: 'IN TRANSIT',
+        delivered: 'COMPLETED'
+      })[d.status] || 'OPEN'
+    }));
+
+    render();
+  } catch (error) {
+    toast('Could not load orders: ' + error.message);
+  }
+  }
 function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2600)}
 function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===p));document.getElementById('pageTitle').textContent=pageTitles[p];render();window.scrollTo({top:0,behavior:'smooth'})}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
