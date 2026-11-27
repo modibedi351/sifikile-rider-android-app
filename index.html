@@ -144,7 +144,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('riderApp').style.display = '';
     toast('Welcome to Sifikile Fleet!');
-    render();
+    await loadJobs();
 
   } catch (error) {
     message.textContent = error.message;
