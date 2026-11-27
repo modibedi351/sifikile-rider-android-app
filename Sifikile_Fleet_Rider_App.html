@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#061f38">
+<title>Sifikile Fleet | Rider</title>
+<style>
+:root{--navy:#061f38;--navy2:#0d365b;--orange:#ff8500;--paper:#f3f6fa;--ink:#10243a;--muted:#718096;--line:#dce4ed;--white:#fff;--green:#168653;--red:#bd3d36}
+*{box-sizing:border-box}body{margin:0;background:#e8edf3;color:var(--ink);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}button,input,select{font:inherit}button{cursor:pointer;border:0}
+.app{max-width:1200px;min-height:100vh;margin:auto;background:var(--paper);display:grid;grid-template-columns:245px 1fr;box-shadow:0 12px 50px #061f3818}
+.sidebar{background:var(--navy);color:white;padding:25px 17px;display:flex;flex-direction:column;gap:26px}.brand{display:flex;align-items:center;gap:11px;padding:4px 8px}.logo{width:43px;height:43px;border-radius:14px;background:var(--orange);display:grid;place-items:center;color:var(--navy);font-size:25px;font-weight:950}.brand strong{display:block;font-size:15px;letter-spacing:.7px}.brand small{color:#c7d3df;font-size:10px;letter-spacing:2px}.nav-label{font-size:10px;color:#9fb2c7;letter-spacing:1.8px;padding:0 12px;margin-bottom:-15px}.nav{display:grid;gap:7px}.nav button{background:transparent;color:#e1eaf3;text-align:left;padding:13px 14px;border-radius:12px;display:flex;align-items:center;gap:12px;font-weight:650}.nav button.active,.nav button:hover{background:#ffffff18;color:var(--orange)}.nav span{font-size:19px;width:22px;text-align:center}.side-bottom{margin-top:auto;border-top:1px solid #ffffff25;padding:17px 10px;color:#c7d3df;font-size:12px;line-height:1.6}
+.main{padding:25px 30px 40px;min-width:0}.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:23px;gap:12px}.eyebrow{font-size:10px;color:var(--muted);letter-spacing:1.6px;font-weight:850}.topbar h1{font-size:25px;margin:5px 0 0;letter-spacing:-.7px}.profile{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:750}.avatar{width:39px;height:39px;border-radius:50%;background:var(--orange);display:grid;place-items:center;color:var(--navy);font-weight:950}.online{display:flex;align-items:center;gap:7px;color:var(--green);font-size:11px;font-weight:850}.dot{width:8px;height:8px;border-radius:50%;background:#19a66b}
+.page{display:none}.page.active{display:block}.hero{background:linear-gradient(115deg,var(--navy),var(--navy2));border-radius:21px;color:white;padding:25px 27px;display:grid;grid-template-columns:1.25fr .75fr;gap:15px;overflow:hidden;position:relative;min-height:185px}.hero h2{font-size:29px;line-height:1.12;margin:9px 0 10px;max-width:450px;letter-spacing:-.8px}.hero p{color:#d8e3ee;font-size:13px;max-width:450px;line-height:1.6}.orange{color:var(--orange)}.hero-art{display:grid;place-items:center;font-size:92px;filter:drop-shadow(0 15px 10px #0005);transform:rotate(-8deg)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}.stat{background:white;border:1px solid var(--line);border-radius:15px;padding:15px}.stat small{color:var(--muted);font-size:10px;font-weight:750;letter-spacing:.6px}.stat b{font-size:23px;display:block;margin:5px 0}.stat em{font-style:normal;color:var(--muted);font-size:11px}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;margin-top:17px}.panel{background:white;border:1px solid var(--line);border-radius:17px;padding:19px}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}.panel h3{margin:0;font-size:16px}.sub{color:var(--muted);font-size:11px;margin-top:4px}.btn{background:var(--orange);color:var(--navy);font-weight:900;border-radius:10px;padding:11px 15px}.btn.dark{background:var(--navy);color:white}.btn.ghost{background:#eaf0f6;color:var(--navy)}.btn.green{background:#e3f5eb;color:#116a40}.btn.red{background:#fff0ef;color:var(--red)}.btn.small{padding:8px 11px;font-size:11px}.btn.full{width:100%;margin-top:12px}.pill{font-size:9px;background:#fff0df;color:#925000;padding:6px 9px;border-radius:30px;font-weight:900;white-space:nowrap}.pill.green{background:#e3f5eb;color:#116a40}.pill.blue{background:#e8f0fa;color:#25527d}
+.list{display:grid;gap:10px}.job{border:1px solid var(--line);border-radius:14px;padding:14px;display:grid;gap:11px}.job-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.job strong{font-size:13px}.job small{display:block;color:var(--muted);font-size:11px;line-height:1.5;margin-top:4px}.route{display:grid;grid-template-columns:18px 1fr;gap:7px;font-size:12px;line-height:1.5}.route .pins{color:var(--orange);font-size:14px}.job-bottom{display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}.pay{font-size:20px;font-weight:950;color:var(--navy)}.actions{display:flex;gap:7px;flex-wrap:wrap}.notice{padding:11px 13px;border-radius:11px;background:#fff3e5;color:#804600;font-size:11px;line-height:1.5;margin-top:12px}.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px;border:1px dashed var(--line);border-radius:12px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:#596777;font-weight:850}.field input,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px;background:#f9fbfd;outline:none;color:var(--ink)}.field input:focus,.field select:focus{border-color:var(--orange);box-shadow:0 0 0 3px #ff850028}
+.earnings-hero{background:var(--navy);color:white;border-radius:17px;padding:22px}.earnings-hero small{color:#cbd7e3;font-size:11px}.earnings-hero strong{font-size:34px;display:block;margin:7px 0}.earnings-hero p{font-size:11px;color:#cbd7e3;margin:0}.two{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px}.mini-stat{background:#f7f9fc;border:1px solid var(--line);padding:15px;border-radius:13px}.mini-stat b{font-size:19px;display:block;margin-top:5px}.transaction{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:12px}.transaction:last-child{border:0}.transaction small{display:block;color:var(--muted);margin-top:4px}.positive{color:var(--green);font-weight:900}
+.toggle{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:800}.toggle input{accent-color:var(--green);width:18px;height:18px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:white;padding:12px 17px;border-radius:11px;box-shadow:0 8px 30px #0003;display:none;z-index:10;font-size:12px;max-width:90%;text-align:center}.mobilebar{display:none}
+@media(max-width:800px){.app{display:block}.sidebar{display:none}.main{padding:18px 14px 90px}.topbar h1{font-size:21px}.hero{grid-template-columns:1fr;min-height:0;padding:21px}.hero h2{font-size:26px}.hero-art{position:absolute;right:14px;bottom:0;font-size:62px;opacity:.45}.grid{grid-template-columns:1fr}.stats{gap:7px}.stat{padding:11px}.stat b{font-size:18px}.mobilebar{display:flex;position:fixed;bottom:0;left:0;right:0;background:var(--navy);padding:8px 4px calc(8px + env(safe-area-inset-bottom));justify-content:space-around;z-index:5}.mobilebar button{background:transparent;color:#e1eaf3;font-size:9px;display:grid;gap:3px;justify-items:center}.mobilebar button span{font-size:19px}.mobilebar button.active{color:var(--orange)}}
+@media(max-width:430px){.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.stats{grid-template-columns:repeat(3,1fr)}.stat small{font-size:8px}.stat b{font-size:16px}.two{gap:8px}.mini-stat{padding:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+ <div class="brand"><div class="logo">S</div><div><strong>SIFIKILE FLEET</strong><small>RIDER PARTNER</small></div></div>
+ <div class="nav-label">RIDER WORKSPACE</div>
+ <nav class="nav">
+  <button class="active" data-page="home"><span>⌂</span>Dashboard</button>
+  <button data-page="jobs"><span>⌁</span>Available jobs</button>
+  <button data-page="active"><span>🏍</span>My deliveries</button>
+  <button data-page="earnings"><span>R</span>Earnings</button>
+  <button data-page="profile"><span>◎</span>Rider profile</button>
+ </nav>
+ <div class="side-bottom">Ride smart. Earn more.<br><b class="orange">Sifikile Fleet & Management</b><br><small>Rider app • Demo mode</small></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="eyebrow">SIFIKILE FLEET / RIDER PARTNER</div><h1 id="pageTitle">Rider dashboard</h1></div><div class="profile"><div class="avatar" id="avatar">TR</div><div><div id="riderName">Thabo Rider</div><div class="online"><span class="dot" id="onlineDot"></span><span id="onlineText">ONLINE</span></div></div></div></header>
+<section class="page active" id="home">
+ <div class="hero"><div><div class="eyebrow orange">YOUR NEXT DELIVERY STARTS HERE</div><h2>Ride. Deliver.<br><span class="orange">Earn on your terms.</span></h2><p>Find nearby delivery jobs, accept offers or counter-offer a fare that works for you. Keep track of every rand you earn.</p><button class="btn" onclick="showPage('jobs')">Find available jobs →</button></div><div class="hero-art">🏍️</div></div>
+ <div class="stats">
+  <div class="stat"><small>TODAY'S EARNINGS</small><b id="todayTotal">R0.00</b><em>Completed jobs</em></div>
+  <div class="stat"><small>ACTIVE DELIVERIES</small><b id="activeCount">0</b><em>Accepted by you</em></div>
+  <div class="stat"><small>AVAILABLE JOBS</small><b id="availableCount">0</b><em>Ready to offer</em></div>
+ </div>
+ <div class="grid"><div class="panel"><div class="panel-head"><div><h3>Jobs near you</h3><div class="sub">Review the fare and delivery details</div></div><button class="btn ghost small" onclick="showPage('jobs')">See all</button></div><div class="list" id="homeJobs"></div></div>
+ <div class="panel"><div class="panel-head"><div><h3>Quick overview</h3><div class="sub">Your rider activity</div></div><span class="pill green">LIVE DEMO</span></div><div class="two"><div class="mini-stat"><small>COMPLETED</small><b id="completedCount">0</b></div><div class="mini-stat"><small>ALL-TIME EARNINGS</small><b id="allTimeTotal">R0.00</b></div></div><div class="notice">Demo jobs and earnings are saved in this browser. Connect a secure server to receive real customer bookings and process payouts.</div></div></div>
+</section>
+<section class="page" id="jobs">
+ <div class="panel"><div class="panel-head"><div><h3>Available delivery jobs</h3><div class="sub">Choose a job or suggest your own fare</div></div><span class="pill">OPEN OFFERS</span></div><div class="list" id="jobsList"></div><div class="notice">When you counter-offer, the customer must approve your proposed fare before the job is assigned. Fares shown are illustrative demo amounts.</div></div>
+</section>
+<section class="page" id="active">
+ <div class="panel"><div class="panel-head"><div><h3>My deliveries</h3><div class="sub">Manage accepted jobs and update progress</div></div><span class="pill blue">RIDER JOBS</span></div><div class="list" id="activeList"></div></div>
+</section>
+<section class="page" id="earnings">
+ <div class="earnings-hero"><small>YOUR EARNINGS · ALL TIME</small><strong id="earningsTotal">R0.00</strong><p>Money earned from deliveries marked as completed.</p></div>
+ <div class="two"><div class="mini-stat"><small>COMPLETED DELIVERIES</small><b id="earningsCompleted">0</b></div><div class="mini-stat"><small>AVERAGE PER DELIVERY</small><b id="averagePay">R0.00</b></div></div>
+ <div class="panel" style="margin-top:15px"><div class="panel-head"><h3>Earnings activity</h3><span class="sub">Completed jobs</span></div><div id="transactions"></div></div>
+ <div class="notice">This is an earnings record, not a bank balance. Real payouts, withdrawal requests and payment confirmations require a connected payment provider and admin approval.</div>
+</section>
+<section class="page" id="profile">
+ <div class="panel"><div class="panel-head"><div><h3>Rider profile</h3><div class="sub">Keep your contact and vehicle details up to date</div></div><span class="pill green">PARTNER</span></div>
+ <form id="profileForm"><div class="form-grid">
+ <div class="field"><label>Full name</label><input id="nameInput" value="Thabo Rider" required></div>
+ <div class="field"><label>Mobile number</label><input id="phoneInput" value="071 000 0000" type="tel" required></div>
+ <div class="field"><label>Email address</label><input id="emailInput" type="email" placeholder="rider@example.com"></div>
+ <div class="field"><label>Vehicle</label><select id="vehicleInput"><option>Motorbike</option><option>Scooter</option><option>Bicycle</option></select></div>
+ <div class="field"><label>Registration number</label><input id="regInput" placeholder="e.g. ABC 123 GP"></div>
+ <div class="field"><label>Service area</label><input id="areaInput" value="Kagiso / Krugersdorp"></div>
+ </div><button class="btn full" type="submit">Save rider details</button></form>
+ <div style="margin-top:18px"><label class="toggle"><input type="checkbox" id="availabilityToggle" checked> I am available to receive jobs</label></div>
+ <div class="notice">Switch availability off when you are not working. In this demo, the setting changes your rider status locally.</div></div>
+</section>
+</main></div>
+<nav class="mobilebar"><button class="active" data-page="home"><span>⌂</span>Home</button><button data-page="jobs"><span>⌁</span>Jobs</button><button data-page="active"><span>🏍</span>Deliveries</button><button data-page="earnings"><span>R</span>Earn</button><button data-page="profile"><span>◎</span>Profile</button></nav>
+<div class="toast" id="toast"></div>
+<script>
+const pageTitles={home:'Rider dashboard',jobs:'Available jobs',active:'My deliveries',earnings:'Earnings',profile:'Rider profile'};
+const seedJobs=[
+{id:'SF-2041',kind:'Food delivery',pickup:'Debonairs Pizza, Kagiso Mall',drop:'Kagiso Ext 14, Main Road',distance:4.2,fee:48,customer:'Lerato',note:'Keep food upright'},
+{id:'SF-2042',kind:'Parcel',pickup:'Kagiso Plaza',drop:'Krugersdorp CBD',distance:7.5,fee:68,customer:'Mandla',note:'Small sealed parcel'},
+{id:'SF-2043',kind:'Groceries',pickup:'Checkers, Key West',drop:'Mindalore, Krugersdorp',distance:5.1,fee:55,customer:'Nandi',note:'Please call on arrival'},
+{id:'SF-2044',kind:'Documents',pickup:'Chamdor Business Park',drop:'Kagiso Ext 9',distance:6.3,fee:60,customer:'Sipho',note:'Handle documents carefully'}
+];
+let jobs=JSON.parse(localStorage.getItem('sfRiderJobs')||'null')||seedJobs.map(x=>({...x,status:'OPEN'}));
+let profile=JSON.parse(localStorage.getItem('sfRiderProfile')||'null')||{name:'Thabo Rider',phone:'071 000 0000',email:'',vehicle:'Motorbike',reg:'',area:'Kagiso / Krugersdorp'};
+let available=localStorage.getItem('sfRiderOnline')!=='false';
+function money(n){return 'R'+Number(n||0).toFixed(2)}
+function save(){localStorage.setItem('sfRiderJobs',JSON.stringify(jobs))}
+function toast(msg){let t=document.getElementById('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2600)}
+function showPage(p){document.querySelectorAll('.page').forEach(x=>x.classList.toggle('active',x.id===p));document.querySelectorAll('[data-page]').forEach(x=>x.classList.toggle('active',x.dataset.page===p));document.getElementById('pageTitle').textContent=pageTitles[p];render();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+function jobCard(j,mode){let status=j.status==='COUNTERED'?'COUNTER-OFFER SENT':j.status;return `<article class="job"><div class="job-top"><div><strong>${j.id} · ${j.kind}</strong><small>Customer: ${j.customer} · ${j.distance} km approx.</small></div><span class="pill ${j.status==='COMPLETED'?'green':''}">${status}</span></div><div class="route"><div class="pins">●<br>│<br>●</div><div><b>Pickup:</b> ${j.pickup}<br><b>Drop-off:</b> ${j.drop}<br><span style="color:#718096">${j.note||''}</span></div></div><div class="job-bottom"><div><div class="sub">CUSTOMER OFFER</div><div class="pay">${money(j.fee)}</div></div><div class="actions">${mode==='open'?`<button class="btn small" onclick="acceptJob('${j.id}')">Accept job</button><button class="btn ghost small" onclick="counterJob('${j.id}')">Counter-offer</button>`:mode==='active'?`${j.status==='ACCEPTED'?`<button class="btn small" onclick="updateJob('${j.id}','PICKED UP')">Mark picked up</button>`:''}${j.status==='PICKED UP'?`<button class="btn small" onclick="updateJob('${j.id}','COMPLETED')">Complete delivery</button>`:''}<button class="btn red small" onclick="cancelJob('${j.id}')">Cancel</button>`:`<span class="pill green">Earned ${money(j.fee)}</span>`}</div></div>${j.status==='COUNTERED'?`<small>Your counter-offer: <b>${money(j.counter)}</b> · Waiting for customer approval (demo)</small>`:''}</article>`}
+function acceptJob(id){if(!available){toast('Switch your availability on first.');return}let j=jobs.find(x=>x.id===id);if(!j)return;j.status='ACCEPTED';save();render();toast('Job accepted. It is now in My deliveries.')}
+function counterJob(id){if(!available){toast('Switch your availability on first.');return}let j=jobs.find(x=>x.id===id);let raw=prompt('Enter your counter-offer in rand (customer offer: '+money(j.fee)+')');if(raw===null)return;let amount=Number(raw);if(!Number.isFinite(amount)||amount<=0){toast('Enter a valid amount.');return}j.counter=amount;j.status='COUNTERED';save();render();toast('Counter-offer sent for customer approval.')}
+function updateJob(id,status){let j=jobs.find(x=>x.id===id);if(!j)return;j.status=status;save();render();toast(status==='COMPLETED'?'Delivery completed. Earnings updated.':'Pickup status updated.')}
+function cancelJob(id){if(!confirm('Cancel this accepted job?'))return;let j=jobs.find(x=>x.id===id);if(j){j.status='OPEN';delete j.counter;save();render();toast('Job returned to available jobs.')}} 
+function render(){let open=jobs.filter(x=>x.status==='OPEN'||x.status==='COUNTERED'),active=jobs.filter(x=>['ACCEPTED','PICKED UP'].includes(x.status)),done=jobs.filter(x=>x.status==='COMPLETED'),total=done.reduce((s,x)=>s+Number(x.fee),0),today=total;
+document.getElementById('todayTotal').textContent=money(today);document.getElementById('activeCount').textContent=active.length;document.getElementById('availableCount').textContent=open.length;document.getElementById('completedCount').textContent=done.length;document.getElementById('allTimeTotal').textContent=money(total);document.getElementById('earningsTotal').textContent=money(total);document.getElementById('earningsCompleted').textContent=done.length;document.getElementById('averagePay').textContent=money(done.length?total/done.length:0);
+document.getElementById('jobsList').innerHTML=open.length?open.map(j=>jobCard(j,'open')).join(''):'<div class="empty">No jobs available right now. Check again shortly.</div>';
+document.getElementById('homeJobs').innerHTML=open.length?open.slice(0,2).map(j=>jobCard(j,'open')).join(''):'<div class="empty">No new jobs at the moment.</div>';
+document.getElementById('activeList').innerHTML=active.length?active.map(j=>jobCard(j,'active')).join(''):'<div class="empty">You have no active deliveries. Accept a job to get started.</div>';
+document.getElementById('transactions').innerHTML=done.length?done.slice().reverse().map(j=>`<div class="transaction"><div><b>${j.kind} · ${j.id}</b><small>${j.pickup} → ${j.drop}</small></div><span class="positive">+${money(j.fee)}</span></div>`).join(''):'<div class="empty">Completed delivery earnings will appear here.</div>';
+document.getElementById('riderName').textContent=profile.name;document.getElementById('avatar').textContent=profile.name.split(' ').map(x=>x[0]).join('').slice(0,2).toUpperCase();document.getElementById('onlineDot').style.background=available?'#19a66b':'#bd3d36';document.getElementById('onlineText').textContent=available?'ONLINE':'OFFLINE';document.getElementById('availabilityToggle').checked=available;
+}
+document.getElementById('profileForm').addEventListener('submit',e=>{e.preventDefault();profile={name:nameInput.value.trim(),phone:phoneInput.value.trim(),email:emailInput.value.trim(),vehicle:vehicleInput.value,reg:regInput.value.trim(),area:areaInput.value.trim()};localStorage.setItem('sfRiderProfile',JSON.stringify(profile));render();toast('Rider profile saved.')});
+document.getElementById('nameInput').value=profile.name;document.getElementById('phoneInput').value=profile.phone;document.getElementById('emailInput').value=profile.email;document.getElementById('vehicleInput').value=profile.vehicle;document.getElementById('regInput').value=profile.reg;document.getElementById('areaInput').value=profile.area;
+document.getElementById('availabilityToggle').addEventListener('change',e=>{available=e.target.checked;localStorage.setItem('sfRiderOnline',String(available));render();toast(available?'You are now online for jobs.':'You are now offline.')});
+render();
+</script>
+</body></html>
