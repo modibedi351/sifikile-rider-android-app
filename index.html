@@ -237,7 +237,7 @@ async function updateJob(id, status) {
   }
   }
 function cancelJob(id){if(!confirm('Cancel this accepted job?'))return;let j=jobs.find(x=>x.id===id);if(j){j.status='OPEN';delete j.counter;save();render();toast('Job returned to available jobs.')}} 
-function render(){let open=jobs.filter(x=>x.status==='OPEN'||x.status==='COUNTERED'),active=jobs.filter(x=>['ACCEPTED','PICKED UP'].includes(x.status)),done=jobs.filter(x=>x.status==='COMPLETED'),total=done.reduce((s,x)=>s+Number(x.fee),0),today=total;
+function render(){let open=jobs.filter(x=>x.status==='OPEN'||x.status==='COUNTERED'),active=jobs.filter(x=>[['ACCEPTED','PICKED UP','IN TRANSIT']].includes(x.status)),done=jobs.filter(x=>x.status==='COMPLETED'),total=done.reduce((s,x)=>s+Number(x.fee),0),today=total;
 document.getElementById('todayTotal').textContent=money(today);document.getElementById('activeCount').textContent=active.length;document.getElementById('availableCount').textContent=open.length;document.getElementById('completedCount').textContent=done.length;document.getElementById('allTimeTotal').textContent=money(total);document.getElementById('earningsTotal').textContent=money(total);document.getElementById('earningsCompleted').textContent=done.length;document.getElementById('averagePay').textContent=money(done.length?total/done.length:0);
 document.getElementById('jobsList').innerHTML=open.length?open.map(j=>jobCard(j,'open')).join(''):'<div class="empty">No jobs available right now. Check again shortly.</div>';
 document.getElementById('homeJobs').innerHTML=open.length?open.slice(0,2).map(j=>jobCard(j,'open')).join(''):'<div class="empty">No new jobs at the moment.</div>';
